@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Audios des Cœurs à Prendre — Été 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bai+Jamjuree:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#f5f0e8; font-family:'Bai Jamjuree',sans-serif; color:#0f2035; }
+
+  .header { background:#0f2035; padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 20px rgba(15,32,53,0.4); }
+  .header-inner { max-width:800px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:56px; }
+  .header-logo { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:300; color:white; letter-spacing:0.04em; }
+  .header-logo span { color:#e85a10; }
+  .header-tag { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+
+  .hero { background:linear-gradient(160deg,#0f2035 0%,#1a3a5c 100%); padding:56px 24px 48px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-80px; right:-80px; width:350px; height:350px; border-radius:50%; background:rgba(232,90,16,0.1); filter:blur(60px); }
+  .hero::after { content:''; position:absolute; bottom:-60px; left:-60px; width:280px; height:280px; border-radius:50%; background:rgba(240,184,48,0.08); filter:blur(50px); }
+  .hero-inner { max-width:680px; margin:0 auto; position:relative; z-index:1; }
+  .hero-label { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:#e85a10; margin-bottom:14px; display:block; }
+  .hero-titre { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; color:white; line-height:1.15; margin-bottom:14px; }
+  .hero-titre em { color:#f0b830; font-style:italic; }
+  .hero-sous { font-size:0.88rem; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:24px; }
+  .hero-zone { font-size:0.72rem; color:rgba(255,255,255,0.3); letter-spacing:0.12em; text-transform:uppercase; }
+  .hero-zone span { color:rgba(255,255,255,0.55); }
+
+  .onglets-nav { background:#0f2035; border-top:1px solid rgba(255,255,255,0.06); }
+  .onglets-nav-inner { max-width:800px; margin:0 auto; display:flex; }
+  .onglet-nav-btn { flex:1; padding:14px; border:none; background:none; font-family:'Bai Jamjuree',sans-serif; font-size:0.78rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
+  .onglet-nav-btn.actif { color:white; border-bottom-color:#e85a10; }
+  .onglet-nav-btn:hover { color:rgba(255,255,255,0.7); }
+
+  .contenu { display:none; }
+  .contenu.actif { display:block; }
+
+  /* SECTIONS */
+  .section { max-width:800px; margin:0 auto; padding:56px 24px; }
+  .section-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:#e85a10; margin-bottom:10px; display:block; }
+  .section-titre { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:300; color:#0f2035; line-height:1.2; margin-bottom:16px; }
+  .section-titre em { color:#e85a10; font-style:italic; }
+  .section-texte { font-size:0.85rem; color:#3a5a7a; line-height:1.8; }
+  .section-texte p { margin-bottom:10px; }
+  .section-texte p:last-child { margin-bottom:0; }
+  .divider { height:1px; background:rgba(15,32,53,0.08); max-width:800px; margin:0 auto; }
+
+  /* CONCEPT */
+  .concept-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:28px; }
+  .concept-item { background:white; border-radius:14px; padding:22px 18px; border-bottom:3px solid #e85a10; }
+  .concept-icone { font-size:1.6rem; margin-bottom:10px; display:block; }
+  .concept-titre { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:400; color:#0f2035; margin-bottom:6px; }
+  .concept-texte { font-size:0.78rem; color:#3a5a7a; line-height:1.6; }
+
+  /* AUDIOS */
+  .audio-ligne { display:flex; align-items:center; gap:14px; padding:14px 18px; background:white; border-radius:12px; margin-bottom:8px; }
+  .audio-num { width:34px; height:34px; border-radius:50%; background:#0f2035; color:white; font-size:0.72rem; font-weight:500; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .audio-num.special { background:#e85a10; }
+  .audio-info { flex:1; }
+  .audio-nom { font-size:0.85rem; font-weight:500; color:#0f2035; margin-bottom:2px; }
+  .audio-desc { font-size:0.72rem; color:#3a5a7a; }
+  .audio-badge { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; }
+  .audio-badge.bv { background:rgba(232,90,16,0.1); color:#e85a10; border:1px solid rgba(232,90,16,0.2); }
+  .audio-badge.hb { background:rgba(26,58,92,0.08); color:#1a3a5c; border:1px solid rgba(26,58,92,0.15); }
+
+  /* PARCOURS */
+  .parcours-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  @media(max-width:580px){ .parcours-grid { grid-template-columns:1fr; } }
+  .parcours-card { background:white; border-radius:16px; padding:24px 20px; }
+  .parcours-card.avec { border-top:4px solid #e85a10; }
+  .parcours-card.sans { border-top:4px solid #f0b830; }
+  .parcours-icone { font-size:1.8rem; margin-bottom:12px; display:block; }
+  .parcours-titre { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; color:#0f2035; margin-bottom:8px; }
+  .parcours-texte { font-size:0.78rem; color:#3a5a7a; line-height:1.6; margin-bottom:14px; }
+  .parcours-avantages { list-style:none; }
+  .parcours-avantages li { font-size:0.76rem; color:#1a3a5c; padding:4px 0; display:flex; align-items:flex-start; gap:8px; }
+  .parcours-avantages li::before { content:'→'; color:#e85a10; flex-shrink:0; }
+
+  /* TARIFS */
+  .tarifs-bg { background:#0f2035; padding:56px 24px; }
+  .tarifs-inner { max-width:800px; margin:0 auto; }
+  .tarifs-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:#e85a10; margin-bottom:10px; display:block; text-align:center; }
+  .tarifs-titre { font-family:'Cormorant Garamond',serif; font-size:1.9rem; font-weight:300; color:white; text-align:center; margin-bottom:6px; }
+  .tarifs-sous { font-size:0.78rem; color:rgba(255,255,255,0.4); text-align:center; margin-bottom:36px; }
+  .tarifs-groupe { margin-bottom:28px; }
+  .tarifs-groupe-titre { font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:10px; padding-left:2px; }
+  .tarif-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:20px 22px; margin-bottom:8px; display:flex; align-items:center; gap:18px; transition:all 0.2s; }
+  .tarif-card:hover { background:rgba(255,255,255,0.08); }
+  .tarif-card.vedette { background:rgba(232,90,16,0.12); border-color:rgba(232,90,16,0.3); }
+  .tarif-card.urgence { background:rgba(42,122,80,0.12); border-color:rgba(42,122,80,0.3); }
+  .tarif-info { flex:1; }
+  .tarif-nom { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:white; margin-bottom:4px; }
+  .tarif-desc { font-size:0.76rem; color:rgba(255,255,255,0.4); line-height:1.5; }
+  .tarif-desc strong { color:rgba(255,255,255,0.65); }
+  .tarif-prix { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:300; color:#f0b830; white-space:nowrap; text-align:right; }
+  .tarif-prix .gratuit { color:#5ab87a; font-size:1.4rem; }
+  .tarif-prix .ancien { font-size:0.9rem; color:rgba(255,255,255,0.25); text-decoration:line-through; display:block; }
+  .badge-vedette { font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; background:#e85a10; color:white; padding:2px 7px; border-radius:20px; margin-left:7px; vertical-align:middle; }
+  .badge-urgence { font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; background:#2a7a50; color:white; padding:2px 7px; border-radius:20px; margin-left:7px; vertical-align:middle; }
+  .tarifs-note { font-size:0.7rem; color:rgba(255,255,255,0.25); font-style:italic; font-family:'Cormorant Garamond',serif; text-align:center; margin-top:6px; }
+
+  /* CTA */
+  .cta-pres { max-width:800px; margin:0 auto; padding:48px 24px; text-align:center; }
+  .cta-pres-texte { font-size:0.82rem; color:#3a5a7a; line-height:1.7; margin-bottom:20px; }
+  .btn-cgv { display:inline-block; padding:13px 28px; border-radius:10px; background:#e85a10; color:white; font-family:'Bai Jamjuree',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.08em; cursor:pointer; border:none; transition:all 0.2s; box-shadow:0 4px 16px rgba(232,90,16,0.3); }
+  .btn-cgv:hover { transform:translateY(-1px); box-shadow:0 6px 22px rgba(232,90,16,0.45); }
+
+  /* CGV */
+  .cgv-conteneur { max-width:720px; margin:0 auto; padding:48px 24px 60px; }
+  .cgv-section { margin-bottom:28px; }
+  .cgv-num { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:#e85a10; margin-bottom:6px; display:block; }
+  .cgv-titre { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; color:#0f2035; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(15,32,53,0.08); }
+  .cgv-texte { font-size:0.8rem; color:#3a5a7a; line-height:1.8; }
+  .cgv-texte p { margin-bottom:8px; }
+  .cgv-texte p:last-child { margin-bottom:0; }
+  .cgv-texte strong { color:#0f2035; }
+  .cgv-alerte { background:#fff5f0; border-left:3px solid #e85a10; border-radius:0 8px 8px 0; padding:12px 14px; margin-top:10px; font-size:0.78rem; color:#0f2035; line-height:1.6; }
+  .cgv-alerte strong { color:#e85a10; }
+  .cgv-vert { background:#f0faf5; border-left:3px solid #2a7a50; border-radius:0 8px 8px 0; padding:12px 14px; margin-top:10px; font-size:0.78rem; color:#0f2035; line-height:1.6; }
+  .cgv-vert strong { color:#2a7a50; }
+  .tarifs-recap { background:#f5f0e8; border-radius:12px; padding:16px; margin-top:12px; }
+  .tarif-ligne { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid rgba(15,32,53,0.06); font-size:0.8rem; }
+  .tarif-ligne:last-child { border-bottom:none; }
+  .tarif-ligne-nom { color:#3a5a7a; }
+  .tarif-ligne-prix { color:#0f2035; font-weight:500; }
+
+  /* CASES */
+  .engagement-wrap { background:white; border:1.5px solid rgba(15,32,53,0.1); border-radius:16px; padding:28px 24px; margin-top:36px; }
+  .engagement-titre { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; color:#0f2035; margin-bottom:6px; }
+  .engagement-sous { font-size:0.75rem; color:#3a5a7a; margin-bottom:20px; }
+  .checkbox-item { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; cursor:pointer; }
+  .checkbox-item:last-of-type { margin-bottom:0; }
+  .checkbox-input { width:20px; height:20px; border-radius:5px; border:1.5px solid rgba(15,32,53,0.2); background:#f5f0e8; cursor:pointer; flex-shrink:0; margin-top:1px; appearance:none; -webkit-appearance:none; position:relative; transition:all 0.2s; }
+  .checkbox-input:checked { background:#e85a10; border-color:#e85a10; }
+  .checkbox-input:checked::after { content:'✓'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:white; font-size:0.75rem; font-weight:700; }
+  .checkbox-label { font-size:0.8rem; color:#3a5a7a; line-height:1.55; cursor:pointer; }
+  .checkbox-label strong { color:#0f2035; }
+
+  .yurplan-wrap { margin-top:28px; text-align:center; }
+  .btn-yurplan { display:inline-block; padding:16px 40px; border-radius:12px; background:#e8e0d0; color:rgba(15,32,53,0.3); font-family:'Bai Jamjuree',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:0.1em; text-decoration:none; transition:all 0.3s; pointer-events:none; border:none; cursor:default; }
+  .btn-yurplan.actif { background:#e85a10; color:white; box-shadow:0 4px 22px rgba(232,90,16,0.35); pointer-events:all; cursor:pointer; }
+  .btn-yurplan.actif:hover { transform:translateY(-2px); box-shadow:0 6px 28px rgba(232,90,16,0.5); }
+  .yurplan-note { font-size:0.7rem; color:#3a5a7a; margin-top:12px; line-height:1.6; }
+  .yurplan-wa { display:inline-flex; align-items:center; gap:8px; margin-top:14px; padding:11px 22px; border-radius:10px; background:rgba(37,211,102,0.1); border:1.5px solid rgba(37,211,102,0.25); color:#1a6b35; font-family:'Bai Jamjuree',sans-serif; font-size:0.78rem; text-decoration:none; transition:all 0.2s; }
+  .yurplan-wa:hover { background:rgba(37,211,102,0.18); }
+
+  .footer { background:#0f2035; text-align:center; padding:24px 20px; font-size:0.65rem; color:rgba(255,255,255,0.22); letter-spacing:0.05em; line-height:1.8; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-logo">Les <span>Cœurs</span> Solitaires</div>
+    <div class="header-tag">Finistère · Côtes d'Armor · Été 2026</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Nouveau · Été 2026</span>
+    <h1 class="hero-titre">Les Audios des<br><em>Cœurs à Prendre</em></h1>
+    <p class="hero-sous">Un espace privé où les célibataires se découvrent par leur voix. Pas par une photo, pas par un algorithme. Par ce qu'ils choisissent de dire de leur vie.</p>
+    <div class="hero-zone">Ouvert aux célibataires du <span>Finistère (29)</span> et des <span>Côtes d'Armor (22)</span></div>
+  </div>
+</div>
+
+<div class="onglets-nav">
+  <div class="onglets-nav-inner">
+    <button class="onglet-nav-btn actif" onclick="basculer('presentation',this)">Présentation</button>
+    <button class="onglet-nav-btn" onclick="basculer('cgv',this)">Conditions générales</button>
+  </div>
+</div>
+
+<!-- PRÉSENTATION -->
+<div class="contenu actif" id="contenu-presentation">
+
+  <div class="section">
+    <span class="section-label">Le concept</span>
+    <h2 class="section-titre">La voix avant <em>tout le reste</em></h2>
+    <div class="section-texte">
+      <p>Les Cœurs Solitaires, groupe privé Facebook, est une communauté de célibataires qui aiment la vraie vie et veulent impulser un renouveau dans leur vie sentimentale très loin des algorithmes des applications de rencontre.</p>
+      <p>Cet été, je vous propose un espace humain où chaque profil a été lu, validé et accueilli par une personne réelle. Moi, Lili Karantez, coach en relations amoureuses, auteure et organisatrice d'événements pour célibataires.</p>
+      <p>Avec Les Audios des Cœurs à Prendre, on se découvre par les mots et par la voix. Et oui, la voix : cet organe puissant qui offre de nombreuses sensations.</p>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-item">
+        <span class="concept-icone">🎙</span>
+        <div class="concept-titre">La voix d'abord</div>
+        <p class="concept-texte">Pas de photo. Pas de filtre. On découvre l'autre par sa voix, ses mots, son rythme. Ce qu'on ne peut pas tricher.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-icone">🧡</span>
+        <div class="concept-titre">Une matcheuse humaine</div>
+        <p class="concept-texte">Quand vous signalez un intérêt, c'est Lili qui lit les deux profils et décide de la mise en relation. Pas un algorithme.</p>
+      </div>
+      <div class="concept-item">
+        <span class="concept-icone">🌊</span>
+        <div class="concept-titre">100% breton</div>
+        <p class="concept-texte">Réservé aux célibataires du Finistère et des Côtes d'Armor. Une communauté locale, humaine, de confiance.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <span class="section-label">Comment ça marche</span>
+    <h2 class="section-titre">5 audios pour se <em>dévoiler</em></h2>
+    <div class="section-texte">
+      <p>Chaque membre enregistre un audio de bienvenue à l'inscription, puis un nouveau message vocal chaque mardi de juillet. Votre profil vit et évolue semaine après semaine.</p>
+    </div>
+    <div style="margin-top:24px">
+      <div class="audio-ligne"><div class="audio-num special">♥</div><div class="audio-info"><div class="audio-nom">Audio de bienvenue</div><div class="audio-desc">À envoyer avant le 30 juin. Qui êtes-vous en quelques mots ?</div></div><span class="audio-badge bv">À l'inscription</span></div>
+      <div class="audio-ligne"><div class="audio-num">1</div><div class="audio-info"><div class="audio-nom">Mardi 7 juillet</div><div class="audio-desc">À envoyer avant le 5 juillet.</div></div><span class="audio-badge hb">Hebdo</span></div>
+      <div class="audio-ligne"><div class="audio-num">2</div><div class="audio-info"><div class="audio-nom">Mardi 14 juillet</div><div class="audio-desc">À envoyer avant le 12 juillet.</div></div><span class="audio-badge hb">Hebdo</span></div>
+      <div class="audio-ligne"><div class="audio-num">3</div><div class="audio-info"><div class="audio-nom">Mardi 21 juillet</div><div class="audio-desc">À envoyer avant le 19 juillet.</div></div><span class="audio-badge hb">Hebdo</span></div>
+      <div class="audio-ligne"><div class="audio-num">4</div><div class="audio-info"><div class="audio-nom">Mardi 28 juillet</div><div class="audio-desc">À envoyer avant le 26 juillet.</div></div><span class="audio-badge hb">Hebdo</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <span class="section-label">La mise en relation</span>
+    <h2 class="section-titre">Comment ça <em>fonctionne ?</em></h2>
+    <div style="background:white; border-radius:16px; padding:28px 24px; border-left:4px solid #e85a10; border-top-left-radius:0; border-bottom-left-radius:0; margin-top:24px;">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:#0f2035; line-height:1.8; margin-bottom:12px;">Quand un profil vous touche, vous me le signalez. Si vous n'êtes pas inscrit au programme, je vous envoie un formulaire à compléter.</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:#0f2035; line-height:1.8; margin-bottom:16px;">Si c'est réalisable, je fais la mise en relation avec votre consentement.</p>
+      <p style="font-size:0.78rem; color:#e85a10; font-weight:500; letter-spacing:0.03em;">⚠ Important : la mise en relation dépend des profils disponibles dans l'espace au moment de votre demande.</p>
+    </div>
+  </div>
+
+  <!-- TARIFS -->
+  <div class="tarifs-bg">
+    <div class="tarifs-inner">
+      <span class="tarifs-label">Tarifs</span>
+      <h2 class="tarifs-titre">Les offres de l'été</h2>
+      <p class="tarifs-sous">Sans reconduction automatique.</p>
+
+      <div class="tarifs-groupe">
+        <div class="tarifs-groupe-titre">Avec profil dans l'espace</div>
+
+        <div class="tarif-card urgence">
+          <div class="tarif-info">
+            <div class="tarif-nom">Profil + 3 mises en relation <span class="badge-urgence">20 places · avant le 22 juin</span></div>
+            <div class="tarif-desc"><strong>5 audios · accès à l'espace · 3 mises en relation</strong><br>Votre profil vocal lu, validé et diffusé. Valable du 1er au 31 juillet 2026.</div>
+          </div>
+          <div class="tarif-prix"><span class="gratuit">GRATUIT</span></div>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-info">
+            <div class="tarif-nom">Profil + 3 mises en relation <span class="badge-vedette">À partir de la 21ème place</span></div>
+            <div class="tarif-desc"><strong>5 audios · accès à l'espace · 3 mises en relation</strong><br>Valable du 1er au 31 juillet 2026.</div>
+          </div>
+          <div class="tarif-prix">29€</div>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-info">
+            <div class="tarif-nom">Abonnement août</div>
+            <div class="tarif-desc"><strong>Profil reconduit + 2 mises en relation offertes.</strong><br>Valable du 1er au 31 août 2026.</div>
+          </div>
+          <div class="tarif-prix">49€</div>
+        </div>
+      </div>
+
+      <div class="tarifs-groupe">
+        <div class="tarifs-groupe-titre">Mises en relation sans profil — valables jusqu'au 31 juillet 2026</div>
+
+        <div class="tarif-card">
+          <div class="tarif-info">
+            <div class="tarif-nom">1 mise en relation</div>
+            <div class="tarif-desc">Vous consultez l'espace et choisissez <strong>1 profil</strong>. Lili fait la mise en relation.</div>
+          </div>
+          <div class="tarif-prix">29€</div>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-info">
+            <div class="tarif-nom">Pack Duo</div>
+            <div class="tarif-desc">Vous consultez l'espace et choisissez <strong>2 profils</strong>.</div>
+          </div>
+          <div class="tarif-prix">49€</div>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-info">
+            <div class="tarif-nom">Pack Trio</div>
+            <div class="tarif-desc">Vous consultez l'espace et choisissez <strong>3 profils</strong>.</div>
+          </div>
+          <div class="tarif-prix">59€</div>
+        </div>
+
+        <div class="tarif-card vedette">
+          <div class="tarif-info">
+            <div class="tarif-nom">Pack Été <span class="badge-vedette">Meilleure offre</span></div>
+            <div class="tarif-desc">Vous consultez l'espace et choisissez <strong>5 profils</strong> sur tout l'été.</div>
+          </div>
+          <div class="tarif-prix">69€</div>
+        </div>
+      </div>
+
+      <p class="tarifs-note">Selon les offres de matching disponibles.</p>
+    </div>
+  </div>
+
+  <div class="cta-pres">
+    <p class="cta-pres-texte">Pour finaliser votre inscription, lisez et acceptez nos conditions générales de vente.</p>
+    <button class="btn-cgv" onclick="basculer('cgv',document.querySelectorAll('.onglet-nav-btn')[1])">Lire et accepter les CGV →</button>
+  </div>
+
+</div>
+
+<!-- CGV -->
+<div class="contenu" id="contenu-cgv">
+  <div class="cgv-conteneur">
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 1</span>
+      <div class="cgv-titre">Identité du prestataire</div>
+      <div class="cgv-texte">
+        <p><strong>Lili Karantez</strong>, entreprise individuelle, coach en relations amoureuses, auteure et organisatrice d'événements pour célibataires.</p>
+        <p>Adresse : Centre des Affaires Lorient La Base, 1 rue Étienne d'Orves, 56100 Lorient.</p>
+        <p>Email : lilikarantez@gmail.com · SIRET : 40149331700069</p>
+        <p><em>Non assujettie à la TVA — article 293B du Code Général des Impôts.</em></p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 2</span>
+      <div class="cgv-titre">Nature du service</div>
+      <div class="cgv-texte">
+        <p>Les Audios des Cœurs à Prendre est un service de mise en relation entre particuliers célibataires, proposé dans le cadre de la communauté Les Cœurs Solitaires.</p>
+        <p>Le service comprend selon l'offre choisie : l'accès à un espace membres, la publication d'un profil vocal, et des mises en relation effectuées manuellement par Lili Karantez.</p>
+        <p><strong>Lili Karantez est un intermédiaire de mise en relation. Elle ne garantit pas de résultat sentimental.</strong></p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 3</span>
+      <div class="cgv-titre">Tarifs</div>
+      <div class="cgv-texte">
+        <p>Tous les prix sont indiqués en euros, toutes taxes comprises. Lili Karantez n'est pas assujettie à la TVA.</p>
+        <div class="tarifs-recap">
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Profil + 3 mises en relation — 20 premières places avant le 22 juin 2026</span><span class="tarif-ligne-prix">Gratuit</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Profil + 3 mises en relation — à partir de la 21ème place (juillet 2026)</span><span class="tarif-ligne-prix">29 €</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Abonnement août — profil reconduit + 2 mises en relation</span><span class="tarif-ligne-prix">49 €</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">1 mise en relation sans profil</span><span class="tarif-ligne-prix">29 €</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Pack Duo — 2 mises en relation sans profil</span><span class="tarif-ligne-prix">49 €</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Pack Trio — 3 mises en relation sans profil</span><span class="tarif-ligne-prix">59 €</span></div>
+          <div class="tarif-ligne"><span class="tarif-ligne-nom">Pack Été — 5 mises en relation sans profil</span><span class="tarif-ligne-prix">69 €</span></div>
+        </div>
+        <p style="margin-top:10px;"><em>Selon les offres de matching disponibles.</em></p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 4</span>
+      <div class="cgv-titre">Paiement</div>
+      <div class="cgv-texte">
+        <p>Le paiement s'effectue en ligne via la plateforme Yurplan, sécurisée. Le paiement est exigible à la commande. Aucun accès à l'espace membres ne sera ouvert avant réception du paiement confirmé.</p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 5</span>
+      <div class="cgv-titre">Droit de rétractation</div>
+      <div class="cgv-texte">
+        <p>Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas aux prestations de services pleinement exécutées avant la fin du délai de rétractation, lorsque le consommateur a expressément renoncé à ce droit.</p>
+        <div class="cgv-alerte">
+          <strong>Important :</strong> en cochant la case d'acceptation des présentes CGV et en accédant à l'espace membres, vous renoncez expressément à votre droit de rétractation. <strong>Aucun remboursement ne pourra être accordé après ouverture de l'accès.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 6</span>
+      <div class="cgv-titre">Durée et reconduction</div>
+      <div class="cgv-texte">
+        <p>L'abonnement juillet 2026 est valable du 1er au 31 juillet 2026. <strong>Il n'est pas reconduit automatiquement.</strong></p>
+        <p>La reconduction pour le mois d'août fait l'objet d'une nouvelle commande volontaire au tarif de 49 €, valable du 1er au 31 août 2026, et incluant 2 mises en relation offertes.</p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 7</span>
+      <div class="cgv-titre">Obligations du membre</div>
+      <div class="cgv-texte">
+        <p>Le membre s'engage à fournir des informations sincères et exactes le concernant.</p>
+        <p>Tout message vocal à caractère sexuel, offensant ou dégradant sera rejeté immédiatement et l'accès suspendu <strong>sans remboursement</strong>.</p>
+        <p>Le membre s'engage à ne pas partager les contenus de l'espace à des tiers et à respecter la confidentialité des profils consultés.</p>
+        <p>Lili Karantez se réserve le droit de suspendre l'accès de tout membre dont le comportement contreviendrait à la charte de bienveillance, sans obligation de remboursement.</p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 8</span>
+      <div class="cgv-titre">Protection des données personnelles</div>
+      <div class="cgv-texte">
+        <p>Lili Karantez collecte les données suivantes : prénom, âge, ville, email, et messages vocaux.</p>
+        <div class="cgv-vert">
+          <strong>Vos données sont protégées :</strong>
+          <p style="margin-top:8px;">Les messages vocaux sont hébergés sur une plateforme dont les serveurs sont situés en Europe, dans le respect du Règlement Général sur la Protection des Données (RGPD).</p>
+          <p style="margin-top:6px;">Vos coordonnées ne seront jamais vendues, jamais partagées avec un tiers à des fins commerciales.</p>
+          <p style="margin-top:6px;"><strong>Toutes les données collectées seront supprimées dans le mois suivant la fin de votre abonnement.</strong></p>
+        </div>
+        <p style="margin-top:10px;">Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits : lilikarantez@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 9</span>
+      <div class="cgv-titre">Responsabilité</div>
+      <div class="cgv-texte">
+        <p>Lili Karantez met en œuvre tous les moyens raisonnables pour assurer la qualité du service. Elle ne saurait être tenue responsable des suites des rencontres effectuées dans le cadre de ce service.</p>
+        <p>Lili Karantez ne garantit pas un nombre minimum de mises en relation si les profils compatibles ne sont pas disponibles dans l'espace au moment de la demande.</p>
+      </div>
+    </div>
+
+    <div class="cgv-section">
+      <span class="cgv-num">Article 10</span>
+      <div class="cgv-titre">Droit applicable</div>
+      <div class="cgv-texte">
+        <p>Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux compétents seront ceux du ressort du domicile du prestataire.</p>
+      </div>
+    </div>
+
+    <!-- CASES + BOUTON -->
+    <div class="engagement-wrap">
+      <div class="engagement-titre">J'accepte et je m'inscris</div>
+      <p class="engagement-sous">Cochez chaque case pour activer le bouton d'inscription.</p>
+
+      <label class="checkbox-item">
+        <input type="checkbox" class="checkbox-input" onchange="verifier()">
+        <span class="checkbox-label">J'ai lu et j'accepte les <strong>Conditions Générales de Vente</strong> des Audios des Cœurs à Prendre.</span>
+      </label>
+      <label class="checkbox-item">
+        <input type="checkbox" class="checkbox-input" onchange="verifier()">
+        <span class="checkbox-label">Je renonce expressément à mon <strong>droit de rétractation</strong> et comprends qu'aucun remboursement ne sera accordé après ouverture de l'accès.</span>
+      </label>
+      <label class="checkbox-item">
+        <input type="checkbox" class="checkbox-input" onchange="verifier()">
+        <span class="checkbox-label">J'accepte la <strong>politique de protection des données</strong> et consens à la collecte et au traitement de mes données.</span>
+      </label>
+      <label class="checkbox-item">
+        <input type="checkbox" class="checkbox-input" onchange="verifier()">
+        <span class="checkbox-label">Je m'engage à <strong>respecter la charte de bienveillance</strong> de la communauté Les Cœurs Solitaires.</span>
+      </label>
+
+      <div class="yurplan-wrap">
+        <a class="btn-yurplan" id="btn-yurplan" href="https://yp.events/6cd45a0f-d3d2-4280-b6d0-f215f5cdeb2d/Les-Audios-des-Coeurs-a-prendre-en-juillet/ticketing?from=paiement direct" target="_blank">
+          Réserver ma place sur Yurplan →
+        </a>
+        <p class="yurplan-note">
+          Sans reconduction automatique.<br>
+          Vos données ne seront jamais vendues, jamais partagées. SIRET 40149331700069
+        </p>
+        <a href="https://wa.me/33lilikarantez?text=Bonjour%20Lili%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20Les%20Audios%20des%20C%C5%93urs%20%C3%A0%20Prendre." target="_blank" class="yurplan-wa">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#1a6b35"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Une question ? WhatsApp Lili
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Lili Karantez® · Les Cœurs Solitaires · Les Audios des Cœurs à Prendre<br>
+  Centre des Affaires Lorient La Base · 1 rue Étienne d'Orves · 56100 Lorient<br>
+  lilikarantez@gmail.com · SIRET 40149331700069<br>
+  ©2026 Lili Karantez — Toute reproduction interdite, même partielle
+</div>
+
+<script>
+  function basculer(id, btn) {
+    document.querySelectorAll('.contenu').forEach(c => c.classList.remove('actif'));
+    document.querySelectorAll('.onglet-nav-btn').forEach(b => b.classList.remove('actif'));
+    document.getElementById('contenu-' + id).classList.add('actif');
+    btn.classList.add('actif');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function verifier() {
+    const ok = Array.from(document.querySelectorAll('.checkbox-input')).every(c => c.checked);
+    document.getElementById('btn-yurplan').classList.toggle('actif', ok);
+  }
+</script>
+</body>
+</html>
